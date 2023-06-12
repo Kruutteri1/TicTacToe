@@ -3,7 +3,6 @@ package TicTacToe;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 public class GameFunction extends JComponent {
 
@@ -13,12 +12,10 @@ public class GameFunction extends JComponent {
     public static int gameMode = 1;
     public static int gameOver; // 1 - stop game
 
-    int[][] fields;
-    int[][] board = new int[3][3];
-    public static boolean isXTurn = true; // true - X, false - O
-
     public static int[] bestMove = new int[2];
 
+    int[][] fields;
+    public static boolean isXTurn = true; // true - X, false - O
 
     public GameFunction() {
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
@@ -30,7 +27,6 @@ public class GameFunction extends JComponent {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 fields[i][j] = FIELD_EMPTY;
-                board[i][j] = FIELD_EMPTY;
                 gameOver = 0;
                 repaint();
             }
@@ -118,11 +114,9 @@ public class GameFunction extends JComponent {
             if (gameOver != 1) {
                 if (gameMode == 1) {
                     if (fields[i1][j1] == FIELD_EMPTY) {
-
                         fields[i1][j1] = isXTurn ? FIELD_X : FIELD_O;
                         isXTurn = !isXTurn;
                         repaint();
-
 
                     }
                 } else if (gameMode == 2) {
@@ -134,12 +128,72 @@ public class GameFunction extends JComponent {
                         }
                     }
                     if (!isXTurn) {
-                        if (board[i1][j1] == FIELD_EMPTY) {
-                            
+                        if (fields[i1][j1] == FIELD_EMPTY) {
+                            makeMove();
+                            fields[bestMove[0]][bestMove[1]] = FIELD_O;
+                            isXTurn = true;
+                            repaint();
                         }
-
                     }
+                }
+            }
+        }
+    }
 
+    int minimax(int[][] fields, int depth, boolean isMaximizing) {
+        int result = checkWin();
+        if (result == FIELD_X * 3) {
+            return -1; // X wins, return a negative score
+        } else if (result == FIELD_O * 3) {
+            return 1; // O wins, return a positive score
+        } else if (isBoardFull(fields)) {
+            return 0; // Draw, return 0 score
+        }
+
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (fields[i][j] == FIELD_EMPTY) {
+                        fields[i][j] = FIELD_O;
+                        int score = minimax(fields, depth + 1, false);
+                        fields[i][j] = FIELD_EMPTY;
+                        bestScore = Math.max(score, bestScore);
+                    }
+                }
+            }
+            return bestScore;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (fields[i][j] == FIELD_EMPTY) {
+                        fields[i][j] = FIELD_X;
+                        int score = minimax(fields, depth + 1, true);
+                        fields[i][j] = FIELD_EMPTY;
+                        bestScore = Math.min(score, bestScore);
+                    }
+                }
+            }
+            return bestScore;
+        }
+    }
+
+    void makeMove() {
+        int bestScore = Integer.MIN_VALUE;
+
+        // Find the best move for O using minimax algorithm
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (fields[i][j] == FIELD_EMPTY) {
+                    fields[i][j] = FIELD_O;
+                    int score = minimax(fields, 6, false);
+                    fields[i][j] = FIELD_EMPTY;
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove[0] = i;
+                        bestMove[1] = j;
+                    }
                 }
             }
         }

@@ -35,6 +35,7 @@ public class GameFunction extends JComponent {
                 repaint();
             }
         }
+        isXTurn = true;
     }
 
 
@@ -126,13 +127,10 @@ public class GameFunction extends JComponent {
                     }
                 } else if (gameMode == 2) {
                     if (isXTurn) {
-                        if (board[i1][j1] == FIELD_EMPTY) {
-
-                            board[i1][j1] = FIELD_X;
+                        if (fields[i1][j1] == FIELD_EMPTY) {
                             fields[i1][j1] = FIELD_X;
                             isXTurn = false;
                             repaint();
-
                         }
                     }
                     if (!isXTurn) {
@@ -147,7 +145,7 @@ public class GameFunction extends JComponent {
         }
     }
 
-        void drawGrid(Graphics graphics) {
+    void drawGrid(Graphics graphics) {
         int w = getWidth();
         int h = getHeight();
         int dw = w / 3;
@@ -159,7 +157,6 @@ public class GameFunction extends JComponent {
         }
 
     }
-
 
     void drawX(int i, int j, Graphics graphics) {
         graphics.setColor(Color.RED);
@@ -183,8 +180,6 @@ public class GameFunction extends JComponent {
         graphics.drawOval(x + 5 * dw / 100,y,dw * 9 / 10,dh);
     }
 
-
-
     void drawXO(Graphics graphics) {
         if (gameOver != 1) {
             for (int i = 0; i < 3; i++) {
@@ -201,7 +196,7 @@ public class GameFunction extends JComponent {
 
 
 
-        @Override
+    @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         drawGrid(graphics);

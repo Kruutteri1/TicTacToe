@@ -5,13 +5,11 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class GameFunction extends JComponent {
-
     public static final int FIELD_EMPTY = 0;
     public static final int FIELD_X = 10;
     public static final int FIELD_O = 200;
     public static int gameMode = 1;
     public static int gameOver; // 1 - stop game
-
     public static int[] bestMove = new int[2];
 
     int[][] fields;

@@ -38,11 +38,9 @@ public class GameSettings extends JFrame {
         add(radioButtonModeAgainstAI);
 
 
-
         add(jButtonSetSettings);
         setVisible(true);
         GameFunction game = new GameFunction();
-
 
 
         //if choose  gameMode with AI - show jslider for choose difficult
@@ -56,8 +54,6 @@ public class GameSettings extends JFrame {
             }
         });
 
-
-        // if choose gameMode vs Player - hide jslider
         radioButtonModeTwoPlayers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

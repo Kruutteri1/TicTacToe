@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class MainFormForGame extends JFrame {
     public MainFormForGame() {
         // name of window
@@ -31,7 +30,6 @@ public class MainFormForGame extends JFrame {
         buttonPanel.add(btnStart);
 
         setVisible(true);
-
 
         //stop program
         btnEnd.addActionListener(new ActionListener() {
@@ -63,7 +61,5 @@ public class MainFormForGame extends JFrame {
                 }
             }
         });
-
-
     }
 }

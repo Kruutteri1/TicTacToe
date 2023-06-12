@@ -34,7 +34,6 @@ public class GameFunction extends JComponent {
         isXTurn = true;
     }
 
-
     int checkWin() {
         int diag = 0;
         int diag2 = 0;
@@ -86,7 +85,6 @@ public class GameFunction extends JComponent {
         return true;
     }
 
-
     @Override
     protected void processMouseEvent(MouseEvent mouseEvent) {
         super.processMouseEvent(mouseEvent);
@@ -128,12 +126,10 @@ public class GameFunction extends JComponent {
                         }
                     }
                     if (!isXTurn) {
-                        if (fields[i1][j1] == FIELD_EMPTY) {
-                            makeMove();
-                            fields[bestMove[0]][bestMove[1]] = FIELD_O;
-                            isXTurn = true;
-                            repaint();
-                        }
+                        makeMove();
+                        fields[bestMove[0]][bestMove[1]] = FIELD_O;
+                        isXTurn = true;
+                        repaint();
                     }
                 }
             }
@@ -247,8 +243,6 @@ public class GameFunction extends JComponent {
             }
         }
     }
-
-
 
     @Override
     protected void paintComponent(Graphics graphics) {

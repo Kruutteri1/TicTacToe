@@ -4,6 +4,8 @@ Description:
 The TicTacToe program is a Java implementation of the classic Tic-Tac-Toe game with two game modes: 2 players on the same computer and a player versus an AI bot. 
 The AI bot is implemented using the Minimax algorithm, which allows it to make intelligent decisions and provide a challenging opponent.
 
+![image](https://github.com/user-attachments/assets/14fe1dd3-ffca-4c02-a23d-033e77f4f889)
+
 Features:
 
 1. Two Game Modes: The program offers two game modes. In the first mode, two players can play against each other on the same computer. In the second mode, the player can test their skills against an AI bot.
